@@ -109,6 +109,19 @@ function 클리닝함수(x: (string | number)[]) :number[] {
     return array;
 }
 
+//숙제4 - 다른방법
+function 클리닝함수2(x :(string | number)[]) :number[]{
+    let array :number[] = []
+    x.forEach((y)=>{
+        if (typeof y === 'string') {
+            array.push(Number(y));
+        } else {
+            array.push(y);
+        }
+    })
+    return array;
+}
+
 console.log('숙제4');
 console.log(클리닝함수(['1',2,'3']));
 
@@ -123,4 +136,78 @@ function lastSubject(x :{ subject : string | string[] }) :string{
     }
 
     console.log(lastSubject({subject : ['english', 'art']}))
+}
+
+
+//타입이길면 타입지정한다 = type alias(타입변수) / 첫글자는 대문자가 국룰, Type붙인다  ex) AnimalType
+const region = '안산';
+    //region = '서울';   => 단순 값을 바꾸려고하면 안되지만 값이 오브젝트타입이면 가능
+
+const region2 = { 지역 : '안산'}
+region2.지역 = '서울'   //=> 이런식으로 바꾸지못하게 막는방법이 readonly(에러만 띄울뿐 js로 번역은 다 되고있음)
+
+type GirlFriendType = {
+    readonly name? : string         //?물음표는 뒤에 :string | undefined를 줄여서 쓰는것
+}
+const 여친 :GirlFriendType = {
+    name : '엠버'
+}
+//여친.name = '크리스탈';
+
+
+//타입 오브젝트를 합치는것(extend하는것 = &로 연결해준다)
+type PositionX = { x: number}
+type PositionY = { y: number}
+type NewType = PositionX & PositionY
+let position :NewType = {x : 1, y : 2}
+
+//숙제1
+type PositionA = { x: number}
+type PositionB = { x: number}
+type NewType2 = PositionA & PositionB
+let position2 :NewType2= {x : 2}
+//숙제2
+type Homework = {
+    color? :string,
+    size :number,
+    readonly position :number[]
+}
+let 테스트함수 :Homework = {
+    color: '보라',
+    size : 3,
+    position: [1, 2, 3]
+}
+//테스트함수.position = [2.3.4];
+//숙제3
+type DetectType = {
+    name : string,
+    phone? : number,
+    email : string
+}
+let 테스트함수2 :DetectType= {
+    name: 'kim',
+    phone : 123,
+    email : 'abc@naver.com'
+}
+//숙제4
+type NotAdultType = {
+    name : string,
+    number : number,
+    email : string,
+    adult : boolean
+}
+let 미성년자여부 :NotAdultType = {
+    name: '오구',
+    number : 1,
+    email: 'ohgu@naver.com',
+    adult : false
+}
+//숙제4를 숙제3+extend이용해서 해보기
+type AdultType = { adult : boolean }
+type NewType3 = DetectType & AdultType
+let 미성년자확인해보기함수 :NewType3 = {
+    name: '오구',
+    phone : 1,
+    email: 'ohgu@naver.com',
+    adult : false
 }
