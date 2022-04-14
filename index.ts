@@ -211,3 +211,58 @@ let 미성년자확인해보기함수 :NewType3 = {
     email: 'ohgu@naver.com',
     adult : false
 }
+
+//literal type - 변수에 뭐가들어올지 엄격하게 관리가능/자동완성힌트굿
+//숙제1
+let play :'가위'|'바위'|'보';
+
+function 함수5(x :'가위'|'바위'|'보') :('가위'|'바위'|'보')[] {
+    return ['가위']
+}
+함수5('가위');
+
+//const와 literal type => 리터럴타입은 const변수의 업글버전
+let 리터럴타입: '오구' | '주토';
+const 변수 = 'lee';  //const변수에도 타입을 리터럴타입을 줄수있기때문에, 여러개의 타입을 넣을수있다는점에서 업글버전이라 할수있음
+
+//as const
+let 자료 = {
+    name : 'kim'
+} as const //=> 'kim'은 string타입이아닌 'kim'타입이 되는것임! (이중잠금 = as const)
+
+function 내함수2(a: 'kim') {   //=> 'kim'타입 파라미터를 받아야하는 상황
+
+}
+내함수2(자료.name);
+
+
+//함수선언식, 함수표현식, type alias
+type 함수타입 = (a :string) => number;  //파라미터와 리턴타입을 정해서 타입선언해주고
+let 함수2 :함수타입 = function (a) {  //함수표현식으로 펼쳐서 써주면 더 심플한 코드가 될수있음(함수이름은 없음)
+    return 10;
+};
+
+//오브젝트안에 함수저장하는 방법
+type 회원정보 = {
+    name: 'kim',
+    plusOne : (a :number) => number,
+    changeName : () => void
+}
+
+//숙제1
+type CutType = (x :string) => string
+let cutZero :CutType = function (x){
+    let result = x.replace(/^0+/, "");
+    return result
+}
+//숙제2
+function removeDash(x: string): number {
+    let result = x.replace(/-/g, "");
+    return parseFloat(result);
+}
+//숙제2 => typealias
+type RemoveDashType = (x :string) => number
+let removeDash2 :RemoveDashType = function (x){
+    let result = x.replace(/-/g, "");
+    return parseFloat(result);
+}
