@@ -2,6 +2,6 @@
   "compilerOptions": {
     "target": "ES5",
     "module": "commonjs", //import ? require ?
-
+    "strictNullChecks": true
   }
 }

@@ -266,3 +266,4 @@ let removeDash2 :RemoveDashType = function (x){
     let result = x.replace(/-/g, "");
     return parseFloat(result);
 }
+
